@@ -1,0 +1,116 @@
+1.
+#include <ctime>
+int rand_with_range(int a,int b)
+{
+    int rand_num=0;
+    srand((unsigned) time(NULL));
+    do
+    {
+        rand_num=rand()%b+1;
+    } while (rand_num<a);
+    return rand_num;
+}
+2.
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+ 
+int main(void)
+{
+ 
+ 
+srand(time(NULL));
+ 
+int i,n,ar[10][10],temp[10][10];
+ 
+for(i=0;i<10;i++)               
+    for(n=0;n<10;n++)
+    ar[i][n]=rand()%100;
+ 
+for(i=0;i<10;i++)               
+    for(n=0;n<10;n++)
+    {
+        temp[i][n]=ar[n][i];
+    }
+ 
+for(i=0;i<10;i++){              
+    for(n=0;n<10;n++)
+        printf("%.2d ",ar[i][n]);
+ 
+    printf("\n");
+}
+ 
+printf("\n");
+printf("\n");
+ 
+for(i=0;i<10;i++){              
+    for(n=0;n<10;n++)
+        printf("%.2d ",temp[i][n]);
+ 
+    printf("\n");
+}
+ 
+ 
+return 0;
+ 
+}
+3.
+#include "stdafx.h"
+#include <iostream>
+#include <time.h>
+using namespace std;
+ 
+void print(int n, int **a)
+{
+    for(int i = 0; i < n; ++i)
+    {
+        for(int j = 0; j < n; ++j)
+           cout << a[i][j] << "\t";
+    cout << endl;
+    }
+}
+ 
+ void RotateMatrix(int **matrix, int **ret, int n)
+        {
+            for (int i = 0; i < n; ++i)
+               for (int j = 0; j < n; ++j)
+               ret[n - j - 1][i] = matrix[i][j]; 
+ 
+        }
+int main()
+{
+    srand(time(NULL));
+    double x;
+    double f;
+    int c[100];
+    for (int i = 0; i < 100; i++)
+        c[i] = 0;
+    setlocale(LC_CTYPE, "rus"); 
+    printf("Введите N: ");
+    scanf_s("%lf", &f);
+ 
+    while (f <= 0 || f > 30 || round(f) != f)
+    {
+        printf("Вводите N cнова: ");
+        scanf_s("%lf", &f);
+    }
+    int n = (int)f;
+    int **array;
+    array = new int *[n];
+    int **ret;
+    ret = new int *[n];
+    for(int i = 0; i < n; ++i){
+       array[i]= new int [n];
+       ret[i]= new int [n];
+    }
+    for(int i = 0; i < n; ++i)
+        for(int j = 0; j < n; ++j)
+            array[i][j] = rand() % 2;
+    cout << "Матрица:\n" << endl;
+    print(n,array);
+    RotateMatrix(array,ret,4);
+    cout << "\nПовёрнутая против часовой стрелки матрица:\n " << endl;
+    print(n,ret);
+    system("pause");
+    return 0;
+}
